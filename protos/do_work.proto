@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package workservice.grpc;
+
+service WorkService {
+  rpc DoWork(WorkServiceRequest) returns (WorkServiceReply);
+};
+
+message WorkServiceRequest {
+  uint32 duration_ms = 1;
+}
+
+message WorkServiceReply {
+  string message = 1;
+}

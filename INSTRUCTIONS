@@ -1,0 +1,51 @@
+Phase 1
+
+A project that has 3 grpc services that talk to each other. Let's say service A which is the interface for me, the client, that service A is calling services B and C to do its job.
+
+    - Ubuntu/Debian, gcc (whatever you have is ok)
+
+    - setup project with CMake + gRPC + protobuf (warning, gRPC takes about 25 min to build, it’s annoying)
+
+   - install Docker on the system by installing docker-ce (not docker.io, not Docker Desktop)
+
+    - when deployed, each service starts in its own docker container
+
+    - the docker containers should be started by a Docker compose file
+
+ 
+
+Phase 2
+
+Create a Docker image that you can use as a development container
+
+    - this means you have a .devcontainer.json file and you can use VS Code to open the project in the container
+
+    - this image must contain all your dependencies and build tools (CMake, gRPC, protobuf)
+
+    - now you can uninstall gRPC from your host system and everything should still work
+
+    - this is the setup we use at Roche now, we have a standard development environment delivered as a Docker image
+
+ 
+
+Phase 3   
+
+The project uses OpenTelemetry tracing to trace gRPC services.
+
+    - Add OpenTelemetry as a dependency to the project.
+
+    - Use OpenTelemetry tracing to do tracing of a single service, just output the traces to a file.
+
+    - Use context propagation to do distributed tracing (trace a transaction that involves multiple gRPC services).
+
+ 
+
+Aims of the project, in order of importance:
+
+   - Understand Protobuf.
+
+    - Understand gRPC.
+
+    - Understand Docker.
+
+    - Understand OpenTelemetry.

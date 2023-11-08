@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  base:
+    image: grpc-proj-base
+    build:
+      context: .
+      dockerfile: base.Dockerfile
+  service-a:
+    build: ./serviceA
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
+  service-b:
+    build: ./serviceB
+    depends_on:
+      - service-a
+    ports:
+      - 3001:3001
+  service-c:
+    build: ./serviceC
+    depends_on:
+      - service-a
+    ports:
+      - 3002:3002
